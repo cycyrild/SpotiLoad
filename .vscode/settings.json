@@ -1,0 +1,14 @@
+{
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.autocomplete": "disabled",
+    "C_Cpp.errorSquiggles": "disabled",
+    "clangd.enable": true,
+    "clangd.arguments": [
+        "--compile-commands-dir=build",
+        "--background-index",
+        "--clang-tidy",
+        "--completion-style=detailed"
+    ]
+}

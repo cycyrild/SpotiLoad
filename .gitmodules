@@ -1,0 +1,9 @@
+[submodule "external/printf"]
+	path = external/printf
+	url = https://github.com/eyalroz/printf
+[submodule "external/minhook"]
+	path = external/minhook
+	url = https://github.com/TsudaKageyu/minhook
+[submodule "external/boost"]
+	path = external/boost
+	url = https://github.com/boostorg/boost
