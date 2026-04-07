@@ -1,6 +1,6 @@
 # SpotiLoad
 
-## Spotify mod for Windows x86-64 (1.2.86.502)
+## Spotify mod for Windows x86-64 1.2.86.502
 
 **This project only works with Spotify for Windows x86-64 version 1.2.86.502.** \
 \

@@ -13,14 +13,14 @@ namespace sp_load::hooks::bearer_refresh
         if (!out_response)
             return ret;
 
-        const auto &access = out_response->access_token;
-        const auto &refresh = out_response->refresh_token;
+        auto access = out_response->access_token.view();
+        auto refresh = out_response->refresh_token.view();
 
-        if (out_response->access_token.view().size() > 0)
-            printf("[Access Token] %.*s\n", (int)access.view().size(), access.view().data());
+        if (access.size() > 0)
+            printf("[Access Token] %.*s\n", (int)access.size(), access.data());
 
-        if (refresh.view().size() > 0)
-            printf("[Refresh Token] %.*s\n", (int)refresh.view().size(), refresh.view().data());
+        if (refresh.size() > 0)
+            printf("[Refresh Token] %.*s\n", (int)refresh.size(), refresh.data());
 
         return ret;
     }

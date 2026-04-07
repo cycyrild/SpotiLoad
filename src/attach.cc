@@ -26,9 +26,9 @@ namespace sp_load
 
         MyTrackInfoAggregator.OnTrackReady = [](const TrackInfoAggregator::TrackInfo &info)
         {
+            auto b62gid = sp_id::GidToBase62(info.trackGid);
             auto fileIdHex = utils::BytesToHex(info.fileId);
             auto aesKeyHex = utils::BytesToHex(info.aesKey);
-            auto b62gid = sp_id::GidToBase62(info.trackGid);
 
             printf("Track ready:\n");
             printf("  Track URI: spotify:track:%.*s\n", (int)b62gid.size(), b62gid.data());

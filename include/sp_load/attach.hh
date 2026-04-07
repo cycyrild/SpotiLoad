@@ -4,7 +4,7 @@
 #include <hooks/build-track-ctx.hh>
 #include <hooks/create-player.hh>
 #include <hooks/playplay-aes-key.hh>
-#include <sp_id.hh>
+#include <sp-id.hh>
 #include <track-info-aggregator.hh>
 #include <utils.hh>
 #include <windows.h>

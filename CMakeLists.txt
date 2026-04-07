@@ -31,7 +31,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_compile_options(
     -march=skylake
-    -mtune=skylake
     -ffunction-sections
     -fdata-sections
     -fno-exceptions
@@ -50,6 +49,10 @@ add_compile_options(
 
 add_link_options(
     -fuse-ld=lld
+    -nostdlib
+    -nodefaultlibs
+    -nostartfiles
+    -fno-rtlib-defaultlib
 )
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
@@ -58,21 +61,9 @@ set(ALIAS_STANDARD_FUNCTION_NAMES HARD CACHE STRING "" FORCE)
 add_subdirectory(external/printf)
 add_subdirectory(external/minhook)
 
-add_library(boost INTERFACE)
-
-file(GLOB BOOST_INCLUDE_DIRS
-    ${PROJECT_SOURCE_DIR}/external/boost/libs/*/include
-)
-
-target_include_directories(boost SYSTEM INTERFACE
-    ${PROJECT_SOURCE_DIR}/external/boost
-    ${BOOST_INCLUDE_DIRS}
-)
-
-target_compile_definitions(boost INTERFACE
-    BOOST_NO_EXCEPTIONS
-    BOOST_CONTAINER_NO_LIB
-)
+set(BOOST_ROOT ${PROJECT_SOURCE_DIR}/external/boost)
+set(Boost_NO_SYSTEM_PATHS ON)
+find_package(Boost REQUIRED)
 
 target_compile_options(printf PRIVATE -Wno-everything)
 
@@ -98,12 +89,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     PRINTF_ALIAS_STANDARD_FUNCTION_NAMES_HARD=1
 )
 
-target_compile_options(${PROJECT_NAME} PRIVATE
-    -fno-builtin-printf
-)
-
 target_link_options(${PROJECT_NAME} PRIVATE
-    -nostdlib
     -Wl,-e,DllMain
     -Wl,--exclude-all-symbols
     -Wl,-Map,${PROJECT_NAME}.map
@@ -113,8 +99,7 @@ target_link_options(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    printf::printf
-    minhook
-    kernel32
-    boost
+        printf::printf
+        Boost::headers
+        minhook    
 )
