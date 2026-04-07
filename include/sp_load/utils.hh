@@ -6,7 +6,8 @@
 
 namespace sp_load::utils
 {
-    template <size_t N> constexpr auto BytesToHex(const std::array<uint8_t, N> &bytes) -> std::array<char, N * 2>
+    template <size_t N>
+    constexpr auto BytesToHex(const std::array<uint8_t, N> &bytes) -> std::array<char, N * 2>
     {
         constexpr std::array hex{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
@@ -36,7 +37,8 @@ namespace sp_load::utils
         return 0;
     }
 
-    template <size_t N> constexpr auto HexToBytes(const std::array<char, N> &hex) -> std::array<uint8_t, N / 2>
+    template <size_t N>
+    constexpr auto HexToBytes(const std::array<char, N> &hex) -> std::array<uint8_t, N / 2>
     {
         static_assert(N % 2 == 0, "Hex string size must be even");
 

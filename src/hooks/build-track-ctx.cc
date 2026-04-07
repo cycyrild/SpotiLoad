@@ -39,7 +39,7 @@ namespace sp_load::hooks::build_track_ctx
 
         LastTrackGidFileId = spLink; // Update last logged track GID and file ID
 
-        MyTrackInfoAggregator.OnTrackInfo(outCtx->link_id, fileIdBytes, outCtx->nominal_bitrate);
+        GetTrackInfoAggregator().OnTrackInfo(outCtx->link_id, fileIdBytes, outCtx->nominal_bitrate);
         return ret;
     }
 

@@ -24,7 +24,7 @@ namespace sp_load
 
         printf("Spotify.dll loaded at: %p\n", (void *)spDll);
 
-        MyTrackInfoAggregator.OnTrackReady = [](const TrackInfoAggregator::TrackInfo &info)
+        GetTrackInfoAggregator().OnTrackReady = [](const TrackInfoAggregator::TrackInfo &info)
         {
             auto b62gid = sp_id::GidToBase62(info.trackGid);
             auto fileIdHex = utils::BytesToHex(info.fileId);

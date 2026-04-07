@@ -33,7 +33,6 @@ add_compile_options(
     -march=skylake
     -ffunction-sections
     -fdata-sections
-    -fno-exceptions
     -fno-unwind-tables
     -fno-asynchronous-unwind-tables
     -fno-ident
@@ -43,7 +42,9 @@ add_compile_options(
     -fno-stack-protector
     -fno-stack-check
     -mno-stack-arg-probe
-    -fno-threadsafe-statics
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-use-cxa-atexit>
     $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
 )
 
@@ -60,10 +61,8 @@ set(ALIAS_STANDARD_FUNCTION_NAMES HARD CACHE STRING "" FORCE)
 
 add_subdirectory(external/printf)
 add_subdirectory(external/minhook)
+add_subdirectory(external/etl)
 
-set(BOOST_ROOT ${PROJECT_SOURCE_DIR}/external/boost)
-set(Boost_NO_SYSTEM_PATHS ON)
-find_package(Boost REQUIRED)
 
 target_compile_options(printf PRIVATE -Wno-everything)
 
@@ -78,7 +77,7 @@ add_library(${PROJECT_NAME} SHARED
 
 target_include_directories(${PROJECT_NAME}
     BEFORE PRIVATE
-        ${PROJECT_SOURCE_DIR}/include/std
+        ${PROJECT_SOURCE_DIR}/include/runtime
 
     PRIVATE
         ${PROJECT_SOURCE_DIR}/include/sp_load
@@ -100,6 +99,6 @@ target_link_options(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
         printf::printf
-        Boost::headers
-        minhook    
+        etl::etl
+        minhook
 )

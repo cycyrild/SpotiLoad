@@ -1,8 +1,7 @@
 #pragma once
 
-#include <algorithm>
-#include <boost/container/static_vector.hpp>
 #include <cstdint>
+#include <etl/vector.h>
 #include <sp-types.hh>
 
 namespace sp_load
@@ -41,66 +40,61 @@ namespace sp_load
       public:
         void OnTrackInfo(const track_gid_t &gid, const audio_file_id_t &fileId, int bitrate)
         {
-            auto &entry = InsertOrGet(fileId);
+            auto &entry = GetOrInsert(fileId);
 
             entry.trackGid = gid;
-            entry.fileId = fileId;
             entry.bitrate = bitrate;
             entry.mask |= HasBitrate;
 
-            TryFinalize(entry);
+            TryFinalize(&entry);
         }
 
         void OnAesKey(const audio_file_id_t &fileId, const aes_key_t &key)
         {
-            auto &entry = InsertOrGet(fileId);
+            auto &entry = GetOrInsert(fileId);
 
             entry.aesKey = key;
             entry.mask |= HasAesKey;
 
-            TryFinalize(entry);
+            TryFinalize(&entry);
         }
 
       private:
         TrackInfo *Find(const audio_file_id_t &fileId)
         {
-            for (auto &entry : Cache)
-                if (entry.fileId == fileId)
-                    return &entry;
-
+            for (auto &e : Cache)
+                if (e.fileId == fileId)
+                    return &e;
             return nullptr;
         }
 
-        TrackInfo &InsertOrGet(const audio_file_id_t &fileId)
+        TrackInfo &GetOrInsert(const audio_file_id_t &fileId)
         {
             if (auto *existing = Find(fileId))
                 return *existing;
 
-            if (Cache.size() == Cache.capacity())
+            if (Cache.full())
                 Cache.erase(Cache.begin());
 
-            Cache.emplace_back();
-            Cache.back().fileId = fileId;
+            auto &entry = Cache.emplace_back();
+            entry.fileId = fileId;
 
-            return Cache.back();
+            return entry;
         }
 
-        void TryFinalize(TrackInfo &info)
+        void TryFinalize(TrackInfo *entry)
         {
-            if (!info.IsComplete())
+            if (!entry || !entry->IsComplete())
                 return;
 
             if (OnTrackReady)
-                OnTrackReady(info);
+                OnTrackReady(*entry);
 
-            auto it =
-                std::find_if(Cache.begin(), Cache.end(), [&](const TrackInfo &t) { return t.fileId == info.fileId; });
-
-            if (it != Cache.end())
-                Cache.erase(it);
+            auto it = Cache.begin() + (entry - Cache.data());
+            Cache.erase(it);
         }
 
       private:
-        boost::container::static_vector<TrackInfo, 2> Cache;
+        etl::vector<TrackInfo, 2> Cache;
     };
 }

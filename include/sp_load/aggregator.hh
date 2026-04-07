@@ -1,8 +1,12 @@
 #pragma once
 
+#include <instance.hh>
 #include <track-info-aggregator.hh>
 
 namespace sp_load
 {
-    extern TrackInfoAggregator MyTrackInfoAggregator;
+    inline TrackInfoAggregator &GetTrackInfoAggregator()
+    {
+        return StaticInstance<TrackInfoAggregator>();
+    }
 }

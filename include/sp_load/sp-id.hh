@@ -8,10 +8,11 @@ namespace sp_load::sp_id
 {
     constexpr char BASE62[] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    template <size_t OutSize = sizeof(b62_gid_str_t) - 1> constexpr std::array<char, OutSize> GidToBase62(const track_gid_t &gid)
+    template <size_t OutSize = sizeof(b62_gid_str_t) - 1>
+    constexpr std::array<char, OutSize> GidToBase62(const track_gid_t &gid)
     {
         static_assert(OutSize == 22, "Base62 GID must be 22 chars");
-        
+
         std::array<uint8_t, OutSize> dst{};
         size_t i = 0;
 

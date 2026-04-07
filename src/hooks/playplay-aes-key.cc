@@ -18,7 +18,7 @@ namespace sp_load::hooks::playplay_aes_key
         if (req->resource_kind != PlayplayResourceKind::ResourceId20)
             return ret;
 
-        MyTrackInfoAggregator.OnAesKey(req->resource_id, g_AesCapturedKey);
+        GetTrackInfoAggregator().OnAesKey(req->resource_id, g_AesCapturedKey);
         return ret;
     }
 
