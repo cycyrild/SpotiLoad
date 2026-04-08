@@ -5,8 +5,5 @@
 
 namespace sp_load
 {
-    inline TrackInfoAggregator &GetTrackInfoAggregator()
-    {
-        return StaticInstance<TrackInfoAggregator>();
-    }
+    using TrackInfo = Static<TrackInfoAggregator>;
 }

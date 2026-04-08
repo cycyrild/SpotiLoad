@@ -6,10 +6,13 @@ namespace sp_load
     // runtime dependencies, and static destruction ...
 
     template <typename T>
-    T &StaticInstance()
+    struct Static
     {
-        alignas(T) static unsigned char storage[sizeof(T)];
-        static T &instance = *new (storage) T();
-        return instance;
-    }
+        static T &get()
+        {
+            alignas(T) static unsigned char storage[sizeof(T)];
+            static T &instance = *new (storage) T();
+            return instance;
+        }
+    };
 }
