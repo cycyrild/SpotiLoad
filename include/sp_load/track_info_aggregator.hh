@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <etl/vector.h>
-#include <sp-types.hh>
+#include <sp_types.hh>
 
 namespace sp_load
 {

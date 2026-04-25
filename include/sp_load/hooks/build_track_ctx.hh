@@ -2,10 +2,10 @@
 
 #include <aggregator.hh>
 #include <array>
-#include <hooks/install-hook.hh>
-#include <hooks/playplay-aes-key.hh>
+#include <hooks/install_hook.hh>
+#include <hooks/playplay_aes_key.hh>
 #include <hooks/structs.hh>
-#include <sp-types.hh>
+#include <sp_types.hh>
 #include <utils.hh>
 #include <windows.h>
 

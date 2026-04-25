@@ -1,4 +1,4 @@
-#include <hooks/bearer-refresh.hh>
+#include <hooks/bearer_refresh.hh>
 
 // This will be useful if we need to make authenticated requests
 

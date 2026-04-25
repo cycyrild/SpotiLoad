@@ -1,7 +1,7 @@
 #pragma once
 
 #include <aggregator.hh>
-#include <hooks/install-hook.hh>
+#include <hooks/install_hook.hh>
 #include <hooks/structs.hh>
 #include <windows.h>
 

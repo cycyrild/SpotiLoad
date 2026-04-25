@@ -1,4 +1,4 @@
-#include <hooks/playplay-aes-key.hh>
+#include <hooks/playplay_aes_key.hh>
 
 // We obtain the AES key linked to the file_id of the track
 

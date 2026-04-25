@@ -1,11 +1,11 @@
 #pragma once
 
-#include <hooks/bearer-refresh.hh>
-#include <hooks/build-track-ctx.hh>
-#include <hooks/create-player.hh>
-#include <hooks/playplay-aes-key.hh>
-#include <sp-id.hh>
-#include <track-info-aggregator.hh>
+#include <hooks/bearer_refresh.hh>
+#include <hooks/build_track_ctx.hh>
+#include <hooks/create_player.hh>
+#include <hooks/playplay_aes_key.hh>
+#include <sp_id.hh>
+#include <track_info_aggregator.hh>
 #include <utils.hh>
 #include <windows.h>
 

@@ -2,9 +2,9 @@
 
 #include <aggregator.hh>
 #include <array>
-#include <hooks/install-hook.hh>
+#include <hooks/install_hook.hh>
 #include <hooks/structs.hh>
-#include <sp-types.hh>
+#include <sp_types.hh>
 #include <stdint.h>
 #include <utils.hh>
 #include <windows.h>

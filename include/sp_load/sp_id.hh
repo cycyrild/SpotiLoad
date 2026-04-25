@@ -2,7 +2,7 @@
 
 #include <array>
 #include <cstdint>
-#include <sp-types.hh>
+#include <sp_types.hh>
 
 namespace sp_load::sp_id
 {
