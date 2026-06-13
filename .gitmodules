@@ -1,9 +1,9 @@
-[submodule "external/printf"]
-	path = external/printf
-	url = https://github.com/eyalroz/printf
 [submodule "external/minhook"]
 	path = external/minhook
 	url = https://github.com/TsudaKageyu/minhook
 [submodule "external/etl"]
 	path = external/etl
 	url = https://github.com/ETLCPP/etl
+[submodule "external/nt-crtless-runtime"]
+	path = external/nt-crtless-runtime
+	url = https://github.com/cycyrild/nt-crtless-runtime
