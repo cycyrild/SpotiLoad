@@ -16,8 +16,7 @@ namespace sp_load::sp_id
         std::array<uint8_t, OutSize> dst{};
         size_t i = 0;
 
-        auto read_u32_be = [&](size_t offset) -> uint32_t
-        {
+        auto read_u32_be = [&](size_t offset) -> uint32_t {
             return ((uint32_t)gid[offset + 0] << 24) | ((uint32_t)gid[offset + 1] << 16) |
                    ((uint32_t)gid[offset + 2] << 8) | ((uint32_t)gid[offset + 3]);
         };

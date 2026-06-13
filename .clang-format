@@ -1,26 +1,9 @@
-BasedOnStyle: LLVM
+BasedOnStyle: Microsoft
 
-IndentWidth: 4
-BreakBeforeBraces: Allman
-
-NamespaceIndentation: All
 FixNamespaceComments: false
+NamespaceIndentation: All
 
-SortIncludes: true
-IncludeBlocks: Regroup
-
-ColumnLimit: 120
-
-AllowShortFunctionsOnASingleLine: None
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
-AllowShortBlocksOnASingleLine: Never
-AllowShortCaseLabelsOnASingleLine: false
-AlwaysBreakTemplateDeclarations: Yes
-AlignAfterOpenBracket: AlwaysBreak
-AllowAllParametersOfDeclarationOnNextLine: false
-
-BinPackParameters: false
 BinPackArguments: false
+BinPackParameters: false
 
-PenaltyBreakBeforeFirstCallParameter: 1
+SortIncludes: false

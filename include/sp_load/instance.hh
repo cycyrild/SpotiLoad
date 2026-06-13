@@ -5,8 +5,7 @@ namespace sp_load
     // Static storage + placement new to avoid global constructors,
     // runtime dependencies, and static destruction ...
 
-    template <typename T>
-    struct Static
+    template <typename T> struct Static
     {
         static T &get()
         {

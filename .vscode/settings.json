@@ -5,6 +5,7 @@
     "C_Cpp.autocomplete": "disabled",
     "C_Cpp.errorSquiggles": "disabled",
     "clangd.enable": true,
+    "clangd.path": "/usr/bin/clangd-20",
     "clangd.arguments": [
         "--compile-commands-dir=build",
         "--background-index",

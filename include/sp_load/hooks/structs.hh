@@ -8,8 +8,7 @@ namespace sp_load::hooks
     struct RawStdString
     {
       private:
-        union
-        {
+        union {
             char *heap_ptr;
             char sso[16];
         };
