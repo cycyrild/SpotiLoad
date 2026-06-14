@@ -25,13 +25,14 @@ add_library(${PROJECT_NAME} SHARED
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
-        ${PROJECT_SOURCE_DIR}/include/sp_load
+    ${PROJECT_SOURCE_DIR}/include/sp_load
 )
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE
-        WIN32_LEAN_AND_MEAN
-        _CRT_USE_BUILTIN_OFFSETOF=0
+    WIN32_LEAN_AND_MEAN
+    NOMINMAX
+    _CRT_USE_BUILTIN_OFFSETOF
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE
@@ -45,7 +46,7 @@ target_link_options(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
-        nt-crtless-runtime
-        etl::etl
-        minhook
+    nt-crtless-runtime
+    etl::etl
+    minhook
 )

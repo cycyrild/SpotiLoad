@@ -25,26 +25,27 @@ namespace sp_load::hooks::playplay_aes_key
     // We install a small stub that captures the 16 byte key and then matches it to the file_id in Hook()
     void InitializeAesHook(HMODULE spDll)
     {
+        if (g_AesHookStolenBytesSize != g_AesCaptureTrampolineSize)
+        {
+            printf("Aes hook stolen bytes size (%u) does not match trampoline size (%u)\n",
+                   g_AesHookStolenBytesSize,
+                   g_AesCaptureTrampolineSize);
+            return;
+        }
+
         uintptr_t moduleBase = (uintptr_t)spDll;
         uintptr_t hookAddress = moduleBase + HOOK_AES_KEY_RVA;
         uint8_t *dst = (uint8_t *)hookAddress;
 
-        g_AesHookResumeAddress = hookAddress + g_AesHookStolenBytes;
+        g_AesHookResumeAddress = hookAddress + g_AesHookStolenBytesSize;
 
         DWORD oldProtect = 0;
-        VirtualProtect(dst, g_AesHookStolenBytes, PAGE_EXECUTE_READWRITE, &oldProtect);
+        VirtualProtect(dst, g_AesHookStolenBytesSize, PAGE_EXECUTE_READWRITE, &oldProtect);
 
-        memset(dst, 0x90, g_AesHookStolenBytes);
+        memcpy(dst, AesKeyCaptureTrampoline, g_AesHookStolenBytesSize);
 
-        dst[0] = 0x49;
-        dst[1] = 0xBB;
-        *(uintptr_t *)(dst + 2) = (uintptr_t)AesKeyCaptureHookStub;
-        dst[10] = 0x41;
-        dst[11] = 0xFF;
-        dst[12] = 0xE3;
-
-        VirtualProtect(dst, g_AesHookStolenBytes, oldProtect, &oldProtect);
-        FlushInstructionCache(GetCurrentProcess(), dst, g_AesHookStolenBytes);
+        VirtualProtect(dst, g_AesHookStolenBytesSize, oldProtect, &oldProtect);
+        FlushInstructionCache(GetCurrentProcess(), dst, g_AesHookStolenBytesSize);
     }
 
     bool Initialize(HMODULE spDll)

@@ -46,7 +46,7 @@ namespace sp_load::hooks::build_track_ctx
 
     using BuildTrackCtxFn = void *(*)(void *, TrackSelectionCtx *, int);
 
-    constexpr uintptr_t BUILD_TRACK_FILE_SELECTION_CONTEXT_RVA = 0x2D44C4;
+    constexpr uintptr_t BUILD_TRACK_FILE_SELECTION_CONTEXT_RVA = 0x45AC24;
 
     bool Initialize(HMODULE spDll);
 }

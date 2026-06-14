@@ -1,42 +1,34 @@
 .intel_syntax noprefix
 
-.global AesKeyCaptureHookStub
-.global g_AesHookStolenBytes
+.global AesKeyCaptureTrampoline
+.global g_AesHookStolenBytesSize
+.global g_AesCaptureTrampolineSize
 
 .extern g_AesCapturedKey
 .extern g_AesHookResumeAddress
 
 .section .rdata
-g_AesHookStolenBytes: .long AesHookStolenBytesEnd - AesHookStolenBytesBegin
+g_AesHookStolenBytesSize: .long AesHookStolenBytesEnd - AesHookStolenBytesBegin
+g_AesCaptureTrampolineSize: .long AesKeyCaptureTrampolineEnd - AesKeyCaptureTrampoline
+
+AesKeyCaptureTrampoline: # 15 bytes
+    movabs r11, offset AesKeyCaptureHookStub
+    jmp r11
+    nop
+    nop
+AesKeyCaptureTrampolineEnd:
 
 .text
 AesKeyCaptureHookStub:
-    push r10
-    push r11
+    movdqu xmm0, [rdx]
+    movdqu [rip+g_AesCapturedKey], xmm0
 
-    sub rsp, 0x20
-    movdqu [rsp], xmm0
-
-    mov r10, rax
-    movdqu xmm0, [r10]
-
-    lea r11, [rip + g_AesCapturedKey]
-    movdqu [r11], xmm0 # 16 bytes of the AES key are captured here
-
-    movdqu xmm0, [rsp]
-    add rsp, 0x20
-
-    pop r11
-    pop r10
-
-AesHookStolenBytesBegin:
+AesHookStolenBytesBegin: # 15 bytes
     pushfq
-    push 0x3DBBFAAB
-    push r12
-    pop qword ptr [rsp]
-    push rsi
-    mov rsi, r12
+    push r13
+    mov r13, r13
+    push 0x6FFF5A82
+    mov [rsp], r14
 
 AesHookStolenBytesEnd:
-    mov rax, qword ptr [rip + g_AesHookResumeAddress]
-    jmp rax
+    jmp qword ptr [rip + g_AesHookResumeAddress]

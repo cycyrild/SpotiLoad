@@ -19,7 +19,7 @@ namespace sp_load::hooks::bearer_refresh
                                                            OAuthTokenResponseMarshaled *out_response,
                                                            void *json_cursor);
 
-    constexpr uintptr_t MATERIALIZE_RVA = 0xE8269C;
+    constexpr uintptr_t MATERIALIZE_RVA = 0x1068178;
 
     bool Initialize(HMODULE spDll);
 }

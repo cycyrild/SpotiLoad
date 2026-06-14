@@ -22,7 +22,7 @@ namespace sp_load::hooks::create_player
                                      std::optional<uint32_t> post_event,
                                      void *options);
 
-    constexpr uintptr_t CREATE_PLAYER_RVA = 0x2AA878;
+    constexpr uintptr_t CREATE_PLAYER_RVA = 0x431F00;
 
     bool Initialize(HMODULE module);
 }
