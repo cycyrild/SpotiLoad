@@ -36,9 +36,9 @@ namespace sp_load
             printf("  AES Key: %.*s\n", (int)aesKeyHex.size(), aesKeyHex.data());
         };
 
-        sp_load::hooks::playplay_aes_key::Initialize(spDll);
-        sp_load::hooks::build_track_ctx::Initialize(spDll);
-        sp_load::hooks::bearer_refresh::Initialize(spDll);
-        sp_load::hooks::create_player::Initialize(spDll);
+        hooks::playplay_aes_key::Initialize(spDll);
+        hooks::build_track_ctx::Initialize(spDll);
+        hooks::bearer_refresh::Initialize(spDll);
+        hooks::create_player::Initialize(spDll);
     }
 }

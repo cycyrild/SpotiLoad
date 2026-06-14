@@ -21,7 +21,7 @@ AesKeyCaptureTrampolineEnd:
 .text
 AesKeyCaptureHookStub:
     movdqu xmm0, [rdx]
-    movdqu [rip+g_AesCapturedKey], xmm0
+    movdqu [rip + g_AesCapturedKey], xmm0
 
 AesHookStolenBytesBegin: # 15 bytes
     pushfq
